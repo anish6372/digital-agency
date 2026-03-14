@@ -1,0 +1,206 @@
+// ===== SCROLL SHOWCASE — Oden.be style pinned scroll sections =====
+
+.showcase-wrapper {
+    height: 400vh; // 4 slides × 100vh of scroll room
+    position: relative;
+    z-index: 1;
+}
+
+.showcase-panel {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    transition: background 0.8s ease;
+    background: #080400;
+    --accent: #e85d04;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+// ===== LEFT COLUMN — text =====
+.showcase-panel__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 40px 80px 80px;
+    /* Must be position:relative so absolute children are contained */
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    /* prevent any y-sliding child from poking out */
+
+    @media (max-width: 1024px) {
+        padding: 60px 30px 60px 40px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 32px 24px 20px;
+        order: 2;
+        justify-content: flex-end;
+    }
+}
+
+.showcase-panel__eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0;
+    font-weight: 700;
+    position: absolute;
+    top: 48px;
+    left: 80px;
+    transition: color 0.6s;
+
+    @media (max-width: 768px) {
+        left: 24px;
+        top: 24px;
+    }
+}
+
+// Slides stacked at the same position; GSAP controls opacity/y
+// We use top/bottom/left/right inset (no CSS transform) so GSAP's
+// translateY is the ONLY transform — no conflicts.
+.showcase-slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 80px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Hidden by default — GSAP animates each slide in */
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform, opacity;
+
+    @media (max-width: 1024px) {
+        left: 40px;
+        right: 30px;
+    }
+
+    @media (max-width: 768px) {
+        left: 24px;
+        right: 24px;
+        top: auto;
+        bottom: 80px;
+        height: auto;
+    }
+
+    &__label {
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--slide-accent);
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    &__title {
+        font-family: var(--font-display, 'Arial Black', sans-serif);
+        font-size: clamp(30px, 4.5vw, 58px);
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: 0;
+        line-height: 1.05;
+        margin: 0 0 28px;
+        white-space: pre-line;
+    }
+
+    &__sub {
+        font-size: 15px;
+        line-height: 1.85;
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 380px;
+        margin: 0;
+    }
+}
+
+// Dot navigation
+.showcase-dots {
+    position: absolute;
+    bottom: 48px;
+    left: 80px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 3;
+
+    @media (max-width: 768px) {
+        left: 24px;
+        bottom: 24px;
+    }
+}
+
+.showcase-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.4s, transform 0.4s, width 0.4s;
+
+    &.active {
+        background: var(--accent);
+        width: 28px;
+        border-radius: 4px;
+        transform: none;
+    }
+}
+
+// ===== RIGHT COLUMN — visuals =====
+.showcase-panel__right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 48px;
+    background: rgba(0, 0, 0, 0.25);
+
+    @media (max-width: 768px) {
+        padding: 20px 20px 0;
+        order: 1;
+    }
+}
+
+// All visuals stacked — GSAP controls which is active
+.showcase-visual {
+    position: absolute;
+    inset: 48px;
+    visibility: hidden;
+    opacity: 0;
+    will-change: transform, opacity;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+        inset: 20px 20px 0;
+    }
+}
+
+// The SVG thumbnails
+.showcase__svg {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow:
+        0 0 60px rgba(0, 0, 0, 0.5),
+        0 40px 100px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    filter: drop-shadow(0 0 30px rgba(232, 93, 4, 0.15));
+}

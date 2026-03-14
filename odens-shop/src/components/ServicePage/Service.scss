@@ -1,0 +1,176 @@
+.services-page {
+  background: var(--bg);
+  min-height: 100vh;
+
+  &__header {
+    text-align: center;
+    padding: 80px 80px 60px;
+    background: linear-gradient(180deg, #041236 0%, var(--bg) 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  &__label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 3px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  &__sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__cta {
+    text-align: center;
+    padding: 60px 80px 80px;
+    background: linear-gradient(180deg, var(--bg), #0f0b05);
+    border-top: 1px solid rgba(255,255,255,0.06);
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__grid { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
+    &__header { padding: 60px 24px 40px; }
+    &__cta { padding: 50px 24px 60px; }
+  }
+
+  @media (max-width: 600px) {
+    &__grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 14px; }
+    &__header { padding: 40px 16px 32px; }
+    &__cta { padding: 40px 16px; }
+  }
+}
+
+// ===== SERVICE CARD =====
+.srv-card {
+  background: #0d1225;
+  border-radius: 12px;
+  padding: 32px 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  &--orange::before { background: linear-gradient(90deg, #e85d04, #f48c06); }
+  &--gold::before   { background: linear-gradient(90deg, #c8860a, #e8a020); }
+  &--blue::before   { background: linear-gradient(90deg, #1a3fff, #4a6fff); }
+  &--purple::before { background: linear-gradient(90deg, #6a0dad, #a020f0); }
+  &--green::before  { background: linear-gradient(90deg, #0a7a3a, #10c060); }
+  &--teal::before   { background: linear-gradient(90deg, #0a7a7a, #10c0c0); }
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  &__icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  &__desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      padding-left: 18px;
+      position: relative;
+
+      &::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--orange);
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+// Shared btn styles (duplicated for page isolation)
+.btn {
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+
+  &--gold {
+    background: linear-gradient(135deg, #c8860a, #e8a020);
+    color: #0a0700;
+    font-weight: 600;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,134,10,0.4);
+    }
+  }
+
+  &--lg { padding: 14px 48px; font-size: 15px; }
+}
