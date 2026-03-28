@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav className="navbar">
       {/* Logo — left */}
       <NavLink to="/" className="navbar__logo" onClick={() => setOpen(false)}>
-        Pulse
+        <span>Pulse</span>
       </NavLink>
 
       {/* Links — center */}

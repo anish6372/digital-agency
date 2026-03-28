@@ -14,7 +14,7 @@
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
     transition: background 0.8s ease;
-    background: #080400;
+    background: transparent;
     --accent: #e85d04;
 
     @media (max-width: 768px) {
@@ -168,7 +168,7 @@
     justify-content: center;
     overflow: hidden;
     padding: 48px;
-    background: rgba(0, 0, 0, 0.25);
+    background: transparent;
 
     @media (max-width: 768px) {
         padding: 20px 20px 0;

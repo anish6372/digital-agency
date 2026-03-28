@@ -1,0 +1,116 @@
+.work-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding-bottom: 120px;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    @media (max-width: 768px) { padding: 0 24px; }
+  }
+
+  &__header {
+    text-align: center;
+    padding: 120px 0 80px;
+  }
+
+  &__sub {
+    font-size: 18px;
+    color: var(--gray-400);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    
+    @media (max-width: 900px) { grid-template-columns: 1fr; }
+  }
+
+  .work-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s;
+    
+    &:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      
+      .work-card__img {
+         transform: scale(1.05);
+      }
+      .work-card__overlay { opacity: 1; }
+    }
+
+    &__img {
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    &__overlay {
+       position: absolute;
+       inset: 0;
+       background: rgba(232, 93, 4, 0.2);
+       backdrop-filter: blur(4px);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       opacity: 0;
+       transition: opacity 0.3s;
+       
+       span {
+         color: var(--white);
+         font-weight: 600;
+         padding: 12px 24px;
+         background: rgba(0,0,0,0.6);
+         border-radius: 50px;
+       }
+    }
+
+    &__content {
+      padding: 32px;
+    }
+
+    &__cat {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    &__title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    &__desc {
+      color: var(--gray-400);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  }
+
+  .work-footer {
+     text-align: center;
+     margin-top: 120px;
+     padding: 80px 40px;
+     background: linear-gradient(180deg, var(--bg) 0%, #000 100%);
+     border-top: 1px solid var(--card-border);
+
+     h2 { font-family: var(--font-display); font-size: 40px; color: var(--white); margin-bottom: 16px; }
+     p { color: var(--gray-400); margin-bottom: 40px; font-size: 18px; }
+  }
+}

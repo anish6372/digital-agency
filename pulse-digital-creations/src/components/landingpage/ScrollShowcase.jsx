@@ -174,13 +174,28 @@ export default function ScrollShowcase() {
         if (prev === index) return  // already active, skip re-animation
         activeRef.current = index
 
+        // Force kill all tweens on all elements and hide inactive slides instantly
+        // This prevents the overlapping UI bug on fast scrolls
+        textRefs.current.forEach((el, i) => {
+            if (el) {
+                gsap.killTweensOf(el)
+                if (i !== index && i !== prev) gsap.set(el, { autoAlpha: 0 })
+            }
+        })
+        visualRefs.current.forEach((el, i) => {
+            if (el) {
+                gsap.killTweensOf(el)
+                if (i !== index && i !== prev) gsap.set(el, { autoAlpha: 0 })
+            }
+        })
+
         // Animate out previous
         if (prev >= 0) {
             const dir = index > prev ? -1 : 1 // -1 = slides going up (exit up), 1 = exit down
             const tEl = textRefs.current[prev]
             const vEl = visualRefs.current[prev]
-            if (tEl) gsap.to(tEl, { autoAlpha: 0, y: dir * -40, duration: 0.45, ease: 'power2.in' })
-            if (vEl) gsap.to(vEl, { autoAlpha: 0, y: dir * -40, scale: 0.96, duration: 0.45, ease: 'power2.in' })
+            if (tEl) gsap.to(tEl, { autoAlpha: 0, y: dir * -40, duration: 0.45, ease: 'power2.inOut' })
+            if (vEl) gsap.to(vEl, { autoAlpha: 0, y: dir * -40, scale: 0.96, duration: 0.45, ease: 'power2.inOut' })
             if (dotRefs.current[prev]) dotRefs.current[prev].classList.remove('active')
         }
 
@@ -190,17 +205,17 @@ export default function ScrollShowcase() {
         const tEl = textRefs.current[index]
         const vEl = visualRefs.current[index]
         if (tEl) {
-            gsap.fromTo(tEl, { autoAlpha: 0, y: inDir * 50 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.1 })
+            gsap.fromTo(tEl, { autoAlpha: 0, y: inDir * 50 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: prev >= 0 ? 0.2 : 0 })
         }
         if (vEl) {
-            gsap.fromTo(vEl, { autoAlpha: 0, y: inDir * 60, scale: 0.95 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.75, ease: 'power3.out', delay: 0.05 })
+            gsap.fromTo(vEl, { autoAlpha: 0, y: inDir * 60, scale: 0.95 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.65, ease: 'power3.out', delay: prev >= 0 ? 0.15 : 0 })
         }
         if (dotRefs.current[index]) dotRefs.current[index].classList.add('active')
 
-        // Update panel accent and bg
+        // Update panel accent
         if (panelRef.current) {
             panelRef.current.style.setProperty('--accent', slide.accent)
-            panelRef.current.style.background = slide.bg
+            panelRef.current.style.background = 'transparent'
         }
     }
 

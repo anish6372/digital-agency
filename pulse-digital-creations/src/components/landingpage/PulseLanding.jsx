@@ -6,11 +6,13 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Scene from './PulseBackground'
 import ScrollShowcase from './ScrollShowcase'
-import './OdenShop.scss'
+import './PulseLanding.scss'
+
+// Import Hero Image
+import pulseHero from '../../assets/pulse_hero.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// ── Use your real YouTube embed URLs here ──
 const portfolioItems = [
   {
     id: 1,
@@ -54,10 +56,8 @@ const portfolioItems = [
   },
 ]
 
-// Duplicate items so loop feels seamless
 const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems]
 
-// ── Thumbnail SVGs ──
 function ThumbSVG({ type }) {
   if (type === 'cafe') return (
     <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,13 +125,11 @@ function ThumbSVG({ type }) {
   )
 }
 
-// ── Portfolio Card with hover video preview ──
 function PortfolioCard({ item, onClick }) {
   const [hovered, setHovered] = useState(false)
   const hoverTimer = useRef(null)
 
   const handleMouseEnter = () => {
-    // Small delay so fast scrolls don't trigger
     hoverTimer.current = setTimeout(() => setHovered(true), 400)
   }
 
@@ -140,7 +138,6 @@ function PortfolioCard({ item, onClick }) {
     setHovered(false)
   }
 
-  // Build autoplay hover URL
   const hoverVideoUrl = item.videoUrl
     + '?autoplay=1&mute=1&controls=0&loop=1&modestbranding=1&rel=0&playlist='
     + item.videoUrl.split('/embed/')[1]
@@ -153,12 +150,10 @@ function PortfolioCard({ item, onClick }) {
       onClick={onClick}
     >
       <div className="portfolio-card__thumb">
-        {/* Thumbnail always visible */}
         <div className={`portfolio-card__svg ${hovered ? 'portfolio-card__svg--hidden' : ''}`}>
           <ThumbSVG type={item.thumb} />
         </div>
 
-        {/* Hover iframe video preview */}
         {hovered && (
           <iframe
             className="portfolio-card__preview"
@@ -170,7 +165,6 @@ function PortfolioCard({ item, onClick }) {
           />
         )}
 
-        {/* Play button overlay (only when not hovered) */}
         {!hovered && (
           <div className="portfolio-card__play">
             <svg viewBox="0 0 48 48" fill="none">
@@ -180,7 +174,6 @@ function PortfolioCard({ item, onClick }) {
           </div>
         )}
 
-        {/* Click to expand hint on hover */}
         {hovered && (
           <div className="portfolio-card__expand-hint">Click to open ↗</div>
         )}
@@ -194,7 +187,6 @@ function PortfolioCard({ item, onClick }) {
   )
 }
 
-// ── Popup with auto-advance ──
 function VideoPopup({ item, items, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(
     items.findIndex(i => i.id === item.id)
@@ -209,16 +201,13 @@ function VideoPopup({ item, items, onClose }) {
     setCurrentIndex(i => (i - 1 + items.length) % items.length)
   }
 
-  // Auto-advance URL — YouTube onEnded fires via postMessage
   const popupVideoUrl = current.videoUrl
     + '?autoplay=1&rel=0&modestbranding=1&enablejsapi=1'
 
-  // Listen for YouTube "video ended" via postMessage
   useEffect(() => {
     const handler = (e) => {
       try {
         const data = JSON.parse(e.data)
-        // YouTube playerState 0 = ended
         if (data.event === 'onStateChange' && data.info === 0) {
           goNext()
         }
@@ -228,7 +217,6 @@ function VideoPopup({ item, items, onClose }) {
     return () => window.removeEventListener('message', handler)
   }, [goNext])
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -238,15 +226,9 @@ function VideoPopup({ item, items, onClose }) {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup" onClick={e => e.stopPropagation()}>
-
-        {/* Close */}
         <button className="popup__close" onClick={onClose}>✕</button>
-
-        {/* Prev / Next */}
         <button className="popup__nav popup__nav--prev" onClick={goPrev}>‹</button>
         <button className="popup__nav popup__nav--next" onClick={goNext}>›</button>
-
-        {/* Video */}
         <div className="popup__video">
           <iframe
             key={current.id}
@@ -257,14 +239,10 @@ function VideoPopup({ item, items, onClose }) {
             allowFullScreen
           />
         </div>
-
-        {/* Info */}
         <div className="popup__info">
           <span className="popup__cat">{current.category}</span>
           <h3 className="popup__title">{current.title}</h3>
           <p className="popup__desc">{current.desc}</p>
-
-          {/* Dot indicators */}
           <div className="popup__dots">
             {items.map((it, i) => (
               <button
@@ -280,15 +258,13 @@ function VideoPopup({ item, items, onClose }) {
   )
 }
 
-// ── Main Home Component ──
-export default function Home() {
+export default function PulseLanding() {
   const [popup, setPopup] = useState(null)
   const navigate = useNavigate()
   const trackRef = useRef(null)
   const scrollRef = useRef(null)
   const isPaused = useRef(false)
 
-  // ── Auto-scroll portfolio ──
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
@@ -322,10 +298,24 @@ export default function Home() {
   const pauseScroll = () => { isPaused.current = true }
   const resumeScroll = () => { isPaused.current = false }
 
-  return (
-    <div className="home">
+  const SECTION_COLORS = [
+    '#ff0000', // Hero - Pulse Red
+    '#e91e8c', // Branding - pink
+    '#1a3fff', // Motion - blue
+    '#ffd100', // Marketing - gold
+  ]
 
-      {/* ===== 3D BACKGROUND CANVAS ===== */}
+  const getColor = (progress) => {
+    const colorIdx = Math.min(Math.floor(progress * SECTION_COLORS.length), SECTION_COLORS.length - 1)
+    return SECTION_COLORS[colorIdx]
+  }
+
+  const currentColor = getColor(scrollProgress)
+
+  return (
+    <div className="pulse-landing">
+
+
       <div className="canvas-container">
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
           <Suspense fallback={null}>
@@ -334,67 +324,65 @@ export default function Home() {
         </Canvas>
       </div>
 
-      {/* ===== HERO ===== */}
       <section className="hero">
+        <div className="hero__asset-wrapper">
+          <img src={pulseHero} alt="Pulse Digital Creations" className="hero__asset" />
+        </div>
         <div className="hero__content">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="hero__text-wrapper"
           >
             <h1 className="hero__title">
-              CREATIVE<br />
-              <span className="text-gradient">DIGITAL</span><br />
-              AGENCY
+              ELEVATE YOUR<br />
+              <span className="text-gradient">DIGITAL PULSE</span>
             </h1>
+            <p className="hero__subtitle">
+              We create high-impact visual stories that command attention and drive results.
+            </p>
           </motion.div>
+          <div className="hero__cta">
+            <button className="btn btn--gold btn--lg" onClick={() => navigate('/contact')}>Start a Project</button>
+            <button className="btn btn--outline" onClick={() => navigate('/work')}>Portfolio</button>
+          </div>
         </div>
       </section>
 
-      <div className="hero__cta">
-        <button className="btn btn--outline" onClick={() => navigate('/work')}>View Portfolio</button>
-        <button className="btn btn--gold" onClick={() => navigate('/contact')}>Start a Project</button>
-      </div>
-
-      {/* ===== WHO WE ARE ===== */}
-      <section className="about" onClick={() => navigate('/about')} style={{ cursor: 'pointer' }}>
-        <div className="about__text">
-          <h2 className="about__title">Who We Are</h2>
-          <p className="about__body">
-            <strong>Pulse Digital Creations</strong> is a creative agency helping
-            brands grow through <strong>branding</strong>, reels production,
-            and <strong>digital marketing</strong>.
-          </p>
-          <p className="about__body">
-            We create modern visual content that builds{' '}
-            <strong>powerful brand identity</strong>.
-          </p>
-          <span className="about__link">Learn more about us →</span>
-        </div>
-        <div className="about__image">
-          <svg viewBox="0 0 420 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="420" height="280" rx="6" fill="#1a1008" />
-            <rect x="70" y="50" width="280" height="180" rx="10" fill="#0d0d0d" stroke="#3a2a10" strokeWidth="1.5" />
-            <circle cx="210" cy="145" r="58" fill="#0a0a0a" stroke="#4a3a18" strokeWidth="2" />
-            <circle cx="210" cy="145" r="38" fill="#111" stroke="#5a4a28" strokeWidth="1.5" />
-            <circle cx="210" cy="145" r="20" fill="#0d0d0d" stroke="#6a5a38" strokeWidth="1" />
-            <circle cx="210" cy="145" r="8" fill="#1a1a1a" />
-            <rect x="120" y="64" width="180" height="36" rx="5" fill="#111" stroke="#2a1a08" strokeWidth="1" />
-            <rect x="310" y="74" width="28" height="18" rx="3" fill="#1a1a1a" stroke="#333" strokeWidth="0.5" />
-            <circle cx="96" cy="82" r="9" fill="#c8700a" opacity="0.75" />
-          </svg>
+      <section className="about-split" onClick={() => navigate('/about')} style={{ cursor: 'pointer' }}>
+        <div className="container">
+          <div className="about-grid">
+            <div className="about-content">
+              <p className="section-label">Innovative Agency</p>
+              <h2 className="section-title">We are Pulse Digital Creations</h2>
+              <p className="about-body">
+                We are a creative powerhouse specializing in <strong>brand identity</strong>, 
+                premium <strong>reels production</strong>, and <strong>digital strategy</strong>. 
+                Our mission is to help your brand find its unique rhythm in a crowded digital world.
+              </p>
+              <button className="btn btn--link">Explore our story →</button>
+            </div>
+            <div className="about-visual">
+               <div className="glass-card">
+                  <div className="pulse-icon">⚡</div>
+                  <h3>Result Driven</h3>
+                  <p>Turning visual excellence into business growth.</p>
+               </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ===== SCROLL SHOWCASE (Oden.be style) ===== */}
       <ScrollShowcase />
 
-      {/* ===== PORTFOLIO — Auto-scroll with hover video ===== */}
       <section className="portfolio">
-        <p className="section-label">Our Portfolio</p>
-        <h2 className="section-heading">Featured Work</h2>
-        <p className="portfolio__hint">Hover to preview · Click to watch full video</p>
+        <div className="container">
+          <p className="section-label">Our Work</p>
+          <h2 className="section-heading">Featured Projects</h2>
+          <p className="portfolio__hint">Hover to preview full cinematic experiences</p>
+        </div>
 
         <div
           className="portfolio__track"
@@ -414,47 +402,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SERVICES ===== */}
       <section className="services-section">
-        <p className="section-label">What We Do</p>
-        <p className="section-heading-text">Our Services</p>
-        <div className="services-grid">
-          {[
-            { title: 'Reels\nProduction', color: 'black', icon: '🎬' },
-            { title: 'Branding &\nLogo Design', color: 'red', icon: '🎨' },
-            { title: 'Motion\nGraphics', color: 'blue', icon: '✦' },
-          ].map((s) => (
-            <div
-              key={s.title}
-              className={`svc-tile svc-tile--${s.color}`}
-              onClick={() => navigate('/services')}
-            >
-              <span className="svc-tile__icon">{s.icon}</span>
-              <span className="svc-tile__label">{s.title}</span>
-            </div>
-          ))}
+        <div className="container">
+          <p className="section-label">Expertise</p>
+          <h2 className="section-title text-center">Fueling Modern Brands</h2>
+          <div className="services-grid">
+            {[
+              { title: 'Reels Production', color: 'accent', icon: '🎬', desc: 'Cinematic shorts that capture attention.' },
+              { title: 'Brand Identity', color: 'dark', icon: '🎨', desc: 'Holistic visual systems that stand out.' },
+              { title: 'Motion Graphics', color: 'blue', icon: '✦', desc: 'Dynamic visuals that tell your story.' },
+            ].map((s) => (
+              <div
+                key={s.title}
+                className={`svc-card svc-card--${s.color}`}
+                onClick={() => navigate('/services')}
+              >
+                <div className="svc-card__icon">{s.icon}</div>
+                <h3 className="svc-card__title">{s.title}</h3>
+                <p className="svc-card__desc">{s.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ===== GET IN TOUCH ===== */}
-      <section className="contact-strip">
-        <p className="section-heading-text">Get In Touch</p>
-        <div className="contact-strip__inner">
-          <div className="contact-strip__info">
-            <div className="contact-strip__row"><span>📞</span><span>9438556276</span></div>
-            <div className="contact-strip__row"><span>✉</span><span>pulsedigitalcreations</span></div>
+      <section className="contact-cta">
+        <div className="container">
+          <div className="contact-cta__box">
+            <h2 className="section-title">Have a project in mind?</h2>
+            <p>Let's pulse together and create something legendary.</p>
+            <button className="btn btn--gold btn--lg" onClick={() => navigate('/contact')}>
+              Let's Connect
+            </button>
           </div>
-          <button className="btn btn--gold btn--lg" onClick={() => navigate('/contact')}>
-            Start a Project
-          </button>
         </div>
       </section>
 
       <footer className="footer">
-        <p>© 2024 Pulse Digital Creations. All rights reserved.</p>
+        <div className="container">
+          <div className="footer-top">
+             <div className="footer-logo">PULSE</div>
+             <div className="footer-contact">
+                <span>📞 9438556276</span>
+                <span>✉ pulse.digital</span>
+             </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2024 Pulse Digital Creations. Boldly local, Global reach.</p>
+          </div>
+        </div>
       </footer>
 
-      {/* ===== VIDEO POPUP ===== */}
       {popup && (
         <VideoPopup
           item={popup}

@@ -4,17 +4,17 @@
 
   &__header {
     text-align: center;
-    padding: 80px 80px 60px;
-    background: linear-gradient(180deg, #041236 0%, var(--bg) 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 120px 40px 80px;
+    background: linear-gradient(180deg, #0a0a0a 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--card-border);
   }
 
   &__label {
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--orange);
-    font-weight: 500;
+    color: var(--accent);
+    font-weight: 600;
     margin-bottom: 12px;
   }
 
@@ -27,9 +27,9 @@
   }
 
   &__sub {
-    font-size: 16px;
-    color: rgba(255,255,255,0.5);
-    max-width: 500px;
+    font-size: 18px;
+    color: var(--gray-400);
+    max-width: 600px;
     margin: 0 auto;
     line-height: 1.7;
   }
@@ -45,9 +45,9 @@
 
   &__cta {
     text-align: center;
-    padding: 60px 80px 80px;
-    background: linear-gradient(180deg, var(--bg), #0f0b05);
-    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 100px 40px;
+    background: linear-gradient(180deg, var(--bg), #000);
+    border-top: 1px solid var(--card-border);
 
     h2 {
       font-family: var(--font-display);
@@ -79,11 +79,11 @@
 
 // ===== SERVICE CARD =====
 .srv-card {
-  background: #0d1225;
-  border-radius: 12px;
-  padding: 32px 28px;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 40px 32px;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 
@@ -91,8 +91,8 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 12px 12px 0 0;
+    height: 4px;
+    border-radius: 20px 20px 0 0;
   }
 
   &--orange::before { background: linear-gradient(90deg, #e85d04, #f48c06); }
@@ -144,33 +144,11 @@
         content: '→';
         position: absolute;
         left: 0;
-        color: var(--orange);
+        color: var(--accent);
         font-size: 11px;
       }
     }
   }
 }
 
-// Shared btn styles (duplicated for page isolation)
-.btn {
-  padding: 12px 28px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-
-  &--gold {
-    background: linear-gradient(135deg, #c8860a, #e8a020);
-    color: #0a0700;
-    font-weight: 600;
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(200,134,10,0.4);
-    }
-  }
-
-  &--lg { padding: 14px 48px; font-size: 15px; }
-}
+// Shared btn styles removed - using global from index.css
