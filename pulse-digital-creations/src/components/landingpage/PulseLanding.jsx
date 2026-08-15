@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef, useCallback, Suspense } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Canvas } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Scene from './PulseBackground'
 import ScrollShowcase from './ScrollShowcase'
 import './PulseLanding.scss'
 
@@ -284,58 +282,29 @@ export default function PulseLanding() {
     return () => cancelAnimationFrame(scrollRef.current)
   }, [])
 
-
-  const [scrollProgress, setScrollProgress] = useState(0)
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight
-      setScrollProgress(window.scrollY / totalScroll)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   const pauseScroll = () => { isPaused.current = true }
   const resumeScroll = () => { isPaused.current = false }
-
-  const SECTION_COLORS = [
-    '#ff0000', // Hero - Pulse Red
-    '#e91e8c', // Branding - pink
-    '#1a3fff', // Motion - blue
-    '#ffd100', // Marketing - gold
-  ]
-
-  const getColor = (progress) => {
-    const colorIdx = Math.min(Math.floor(progress * SECTION_COLORS.length), SECTION_COLORS.length - 1)
-    return SECTION_COLORS[colorIdx]
-  }
-
-  const currentColor = getColor(scrollProgress)
 
   return (
     <div className="pulse-landing">
 
-
-      <div className="canvas-container">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <Suspense fallback={null}>
-            <Scene scrollProgress={scrollProgress} />
-          </Suspense>
-        </Canvas>
+      <div className="ambient-bg" aria-hidden="true">
+        <span className="ambient-bg__orb ambient-bg__orb--1" />
+        <span className="ambient-bg__orb ambient-bg__orb--2" />
+        <span className="ambient-bg__orb ambient-bg__orb--3" />
+        <span className="ambient-bg__grid" />
       </div>
 
       <section className="hero">
-        <div className="hero__asset-wrapper">
-          <img src={pulseHero} alt="Pulse Digital Creations" className="hero__asset" />
-        </div>
-        <div className="hero__content">
+        <div className="container hero__grid">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="hero__text-wrapper"
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="hero__content"
           >
+            <span className="hero__eyebrow">Modern Digital Agency</span>
             <h1 className="hero__title">
               ELEVATE YOUR<br />
               <span className="text-gradient">DIGITAL PULSE</span>
@@ -343,11 +312,31 @@ export default function PulseLanding() {
             <p className="hero__subtitle">
               We create high-impact visual stories that command attention and drive results.
             </p>
+            <div className="hero__cta">
+              <button className="btn btn--gold btn--lg" onClick={() => navigate('/contact')}>Start a Project</button>
+              <button className="btn btn--outline" onClick={() => navigate('/work')}>Portfolio</button>
+            </div>
+            <div className="hero__badges">
+              {['Reels Production', 'Branding', 'Motion Graphics', 'Digital Marketing'].map((b) => (
+                <span key={b} className="hero__badge">{b}</span>
+              ))}
+            </div>
           </motion.div>
-          <div className="hero__cta">
-            <button className="btn btn--gold btn--lg" onClick={() => navigate('/contact')}>Start a Project</button>
-            <button className="btn btn--outline" onClick={() => navigate('/work')}>Portfolio</button>
-          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
+            className="hero__visual"
+          >
+            <div className="hero__visual-glow" />
+            <img src={pulseHero} alt="Pulse Digital Creations" className="hero__asset" />
+          </motion.div>
+        </div>
+
+        <div className="hero__scroll-cue">
+          <span />
         </div>
       </section>
 

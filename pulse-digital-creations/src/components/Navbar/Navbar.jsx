@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import pulseLogo from '../../assets/pulse-logo.png'
 import './Navbar.scss'
 
 export default function Navbar() {
@@ -9,7 +10,7 @@ export default function Navbar() {
     <nav className="navbar">
       {/* Logo — left */}
       <NavLink to="/" className="navbar__logo" onClick={() => setOpen(false)}>
-        <span>Pulse</span>
+        <img src={pulseLogo} alt="Pulse Digital Creations" className="navbar__logo-img" />
       </NavLink>
 
       {/* Links — center */}

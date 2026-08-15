@@ -18,31 +18,12 @@
   &__logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: var(--white);
-    text-transform: uppercase;
-    
-    &::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-      border-radius: 8px;
-      clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-      transform: skewX(-15deg);
-    }
-    
-    span {
-      background: linear-gradient(135deg, #fff, #aaa);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  }
+
+  &__logo-img {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
   }
 
   // ===== CENTER LINKS =====
