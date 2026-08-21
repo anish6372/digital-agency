@@ -6,8 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollShowcase from './ScrollShowcase'
 import './PulseLanding.scss'
 
-// Import Hero Image
-import pulseHero from '../../assets/pulse_hero.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -329,10 +327,21 @@ export default function PulseLanding() {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
             className="hero__visual"
+            aria-hidden="true"
           >
             <div className="hero__visual-glow" />
-            <img src={pulseHero} alt="Pulse Digital Creations" className="hero__asset" />
+            <div className="pulse-orbit pulse-orbit--outer" />
+            <div className="pulse-orbit pulse-orbit--inner" />
+            <div className="pulse-core"><span /></div>
+            <svg className="pulse-wave" viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="pulse-wave__glow" d="M0 110H105L135 110L160 62L190 168L225 32L258 110H340L365 78L393 140L425 110H560" />
+              <path className="pulse-wave__line" d="M0 110H105L135 110L160 62L190 168L225 32L258 110H340L365 78L393 140L425 110H560" />
+            </svg>
+            <span className="pulse-node pulse-node--one" />
+            <span className="pulse-node pulse-node--two" />
+            <span className="pulse-node pulse-node--three" />
           </motion.div>
+
         </div>
 
         <div className="hero__scroll-cue">

@@ -243,6 +243,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 410px;
+      isolation: isolate;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(232, 93, 4, 0.15), transparent 35%),
+        linear-gradient(135deg, rgba(18, 23, 47, 0.72), rgba(4, 5, 12, 0.9));
+
+      @media (max-width: 992px) { min-height: 330px; }
     }
 
     &__visual-glow {
@@ -253,14 +263,51 @@
       z-index: -1;
     }
 
-    &__asset {
-      width: 100%;
-      max-width: 560px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 28px;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55);
+    .pulse-orbit {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 50%;
+
+      &--outer { width: 330px; height: 330px; animation: orbitSpin 18s linear infinite; }
+      &--inner { width: 220px; height: 220px; border-color: rgba(232, 93, 4, 0.42); animation: orbitSpin 12s linear infinite reverse; }
+    }
+
+    .pulse-core {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(232, 93, 4, 0.14);
+      border: 1px solid rgba(255, 128, 51, 0.65);
+      box-shadow: 0 0 48px rgba(232, 93, 4, 0.48);
+      animation: corePulse 2.4s ease-in-out infinite;
+
+      span { width: 15px; height: 15px; border-radius: 50%; background: #fff2e9; box-shadow: 0 0 18px #ff6b22; }
+    }
+
+    .pulse-wave {
+      position: absolute;
+      width: 132%;
+      max-width: none;
+
+      path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      &__glow { stroke: rgba(255, 61, 35, 0.22); stroke-width: 18; filter: blur(9px); }
+      &__line { stroke: #ff6138; stroke-width: 3; stroke-dasharray: 1000; animation: waveDraw 4s ease-in-out infinite; }
+    }
+
+    .pulse-node {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff7a38;
+      box-shadow: 0 0 14px #ff5428;
+      animation: nodePulse 2.2s ease-in-out infinite;
+
+      &--one { top: 19%; left: 26%; }
+      &--two { top: 70%; right: 18%; animation-delay: 0.7s; }
+      &--three { top: 27%; right: 24%; animation-delay: 1.3s; }
     }
 
     &__scroll-cue {
@@ -292,6 +339,25 @@
     0% { opacity: 0; transform: translateY(0); }
     30% { opacity: 1; }
     100% { opacity: 0; transform: translateY(14px); }
+  }
+
+  @keyframes orbitSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes corePulse {
+    0%, 100% { transform: scale(0.92); box-shadow: 0 0 28px rgba(232, 93, 4, 0.34); }
+    50% { transform: scale(1.08); box-shadow: 0 0 62px rgba(255, 83, 31, 0.7); }
+  }
+
+  @keyframes waveDraw {
+    0%, 100% { stroke-dashoffset: 1000; opacity: 0.45; }
+    45%, 65% { stroke-dashoffset: 0; opacity: 1; }
+  }
+
+  @keyframes nodePulse {
+    0%, 100% { transform: scale(0.75); opacity: 0.5; }
+    50% { transform: scale(1.4); opacity: 1; }
   }
 
   @keyframes heartbeat {
