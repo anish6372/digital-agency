@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollShowcase from './ScrollShowcase'
+import pulseLogo from '../../assets/pulse-logo.png'
 import './PulseLanding.scss'
 
 
@@ -12,131 +13,51 @@ gsap.registerPlugin(ScrollTrigger)
 const portfolioItems = [
   {
     id: 1,
-    title: 'Cafe Reel',
-    category: 'Reels Production',
-    thumb: 'cafe',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    desc: 'A cinematic reel shot for a premium cafe brand showcasing ambiance and product.',
+    title: '5 Signs Before & After',
+    category: 'Before & After',
+    videoSrc: '/videos/5-signs-before-after.mp4',
+    desc: 'A compelling before-and-after story highlighting five key signs of transformation.',
   },
   {
     id: 2,
-    title: 'Brand Logo — Chromed',
-    category: 'Branding',
-    thumb: 'brand',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    desc: 'Full brand identity for Chromed — a specialty coffee brand.',
+    title: 'CA Transformation',
+    category: 'Before & After',
+    videoSrc: '/videos/before-after-ca.mp4',
+    desc: 'A powerful before-and-after showcase produced for a Chartered Accountancy brand.',
   },
   {
     id: 3,
-    title: 'Cinema FX',
-    category: 'Motion Graphics',
-    thumb: 'cinema',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    desc: 'High-impact motion graphics package for a film production house.',
+    title: 'CA Brand Reel',
+    category: 'Reels Production',
+    videoSrc: '/videos/my-ca-4.mp4',
+    desc: 'A dynamic brand reel crafted for a Chartered Accountancy client.',
   },
   {
     id: 4,
-    title: 'Elixir Brand',
-    category: 'Branding',
-    thumb: 'elixir',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    desc: 'Brand identity and packaging design for Elixir — a premium beverage brand.',
-  },
-  {
-    id: 5,
-    title: 'Product Reel',
+    title: 'CA Desk Story',
     category: 'Reels Production',
-    thumb: 'product',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    desc: 'Dynamic product video showcasing features and lifestyle appeal.',
+    videoSrc: '/videos/my-ca-desk-draft-v1.mp4',
+    desc: 'A cinematic desk-side narrative reel built for a Chartered Accountancy brand.',
   },
 ]
 
 const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems]
 
-function ThumbSVG({ type }) {
-  if (type === 'cafe') return (
-    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="320" height="200" fill="url(#c1)" />
-      <ellipse cx="160" cy="130" rx="55" ry="35" fill="#3a1800" opacity="0.8" />
-      <ellipse cx="160" cy="118" rx="44" ry="27" fill="#c87020" />
-      <ellipse cx="160" cy="112" rx="34" ry="20" fill="#e89020" />
-      <path d="M158 80 Q160 58 162 80" stroke="#fff" strokeWidth="1.5" fill="none" opacity="0.4" />
-      <path d="M153 78 Q155 54 157 78" stroke="#fff" strokeWidth="1.2" fill="none" opacity="0.3" />
-      <rect x="105" y="148" width="110" height="12" rx="6" fill="#2a1000" />
-      <defs><linearGradient id="c1" x1="0" y1="0" x2="320" y2="200" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#1a0800" /><stop offset="100%" stopColor="#3d1a00" />
-      </linearGradient></defs>
-    </svg>
-  )
-  if (type === 'brand') return (
-    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="320" height="200" fill="#0a0a0a" />
-      <text x="160" y="70" textAnchor="middle" fill="white" fontSize="16" fontWeight="700" fontFamily="serif" letterSpacing="4">CHROMED</text>
-      <text x="160" y="95" textAnchor="middle" fill="#888" fontSize="9" letterSpacing="2">HARTLINE COFFEE</text>
-      <text x="100" y="135" textAnchor="middle" fill="#e85d04" fontSize="13" fontWeight="600">⊕ ELIXIR</text>
-      <text x="220" y="135" textAnchor="middle" fill="#aaa" fontSize="12">✈ HORIZON</text>
-      <line x1="40" y1="110" x2="280" y2="110" stroke="#222" strokeWidth="1" />
-    </svg>
-  )
-  if (type === 'cinema') return (
-    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="320" height="200" fill="url(#ci1)" />
-      <circle cx="160" cy="100" r="65" fill="url(#glow1)" opacity="0.35" />
-      <circle cx="160" cy="100" r="32" fill="url(#glow1)" opacity="0.6" />
-      <text x="160" y="107" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold" fontFamily="serif" letterSpacing="3">CINEMA FX</text>
-      <defs>
-        <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f48c06" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#e85d04" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="ci1" x1="0" y1="0" x2="320" y2="200" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#080400" /><stop offset="100%" stopColor="#1a0d00" />
-        </linearGradient>
-      </defs>
-    </svg>
-  )
-  if (type === 'elixir') return (
-    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="320" height="200" fill="#050a1a" />
-      <circle cx="160" cy="90" r="50" fill="none" stroke="url(#eg)" strokeWidth="2" />
-      <circle cx="160" cy="90" r="30" fill="rgba(232,93,4,0.15)" />
-      <text x="160" y="96" textAnchor="middle" fill="#e85d04" fontSize="20" fontWeight="700" letterSpacing="3">ELIXIR</text>
-      <text x="160" y="155" textAnchor="middle" fill="#555" fontSize="10" letterSpacing="4">PREMIUM BRAND</text>
-      <defs><linearGradient id="eg" x1="0" y1="0" x2="320" y2="200" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#e85d04" /><stop offset="100%" stopColor="#f48c06" />
-      </linearGradient></defs>
-    </svg>
-  )
-  return (
-    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="320" height="200" fill="#0d1020" />
-      <rect x="60" y="50" width="200" height="120" rx="8" fill="#111" stroke="#2a2a3a" strokeWidth="1" />
-      <circle cx="160" cy="110" r="38" fill="#0a0a14" stroke="#333" strokeWidth="1.5" />
-      <circle cx="160" cy="110" r="22" fill="#111" stroke="#444" strokeWidth="1" />
-      <circle cx="160" cy="110" r="10" fill="#161620" />
-      <rect x="140" y="55" width="40" height="18" rx="4" fill="#0d0d18" />
-      <circle cx="90" cy="65" r="6" fill="#e85d04" opacity="0.7" />
-    </svg>
-  )
-}
-
 function PortfolioCard({ item, onClick }) {
   const [hovered, setHovered] = useState(false)
-  const hoverTimer = useRef(null)
+  const videoRef = useRef(null)
 
   const handleMouseEnter = () => {
-    hoverTimer.current = setTimeout(() => setHovered(true), 400)
+    setHovered(true)
+    const v = videoRef.current
+    if (v) { v.currentTime = 0; v.play().catch(() => {}) }
   }
 
   const handleMouseLeave = () => {
-    clearTimeout(hoverTimer.current)
     setHovered(false)
+    const v = videoRef.current
+    if (v) v.pause()
   }
-
-  const hoverVideoUrl = item.videoUrl
-    + '?autoplay=1&mute=1&controls=0&loop=1&modestbranding=1&rel=0&playlist='
-    + item.videoUrl.split('/embed/')[1]
 
   return (
     <div
@@ -146,20 +67,19 @@ function PortfolioCard({ item, onClick }) {
       onClick={onClick}
     >
       <div className="portfolio-card__thumb">
-        <div className={`portfolio-card__svg ${hovered ? 'portfolio-card__svg--hidden' : ''}`}>
-          <ThumbSVG type={item.thumb} />
-        </div>
+        <video
+          ref={videoRef}
+          className="portfolio-card__video"
+          src={item.videoSrc}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
 
-        {hovered && (
-          <iframe
-            className="portfolio-card__preview"
-            src={hoverVideoUrl}
-            title={item.title + ' preview'}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen={false}
-          />
-        )}
+        <div className="portfolio-card__logo-badge">
+          <img src={pulseLogo} alt="Pulse Digital Creations" />
+        </div>
 
         {!hovered && (
           <div className="portfolio-card__play">
@@ -197,22 +117,6 @@ function VideoPopup({ item, items, onClose }) {
     setCurrentIndex(i => (i - 1 + items.length) % items.length)
   }
 
-  const popupVideoUrl = current.videoUrl
-    + '?autoplay=1&rel=0&modestbranding=1&enablejsapi=1'
-
-  useEffect(() => {
-    const handler = (e) => {
-      try {
-        const data = JSON.parse(e.data)
-        if (data.event === 'onStateChange' && data.info === 0) {
-          goNext()
-        }
-      } catch { }
-    }
-    window.addEventListener('message', handler)
-    return () => window.removeEventListener('message', handler)
-  }, [goNext])
-
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -226,13 +130,12 @@ function VideoPopup({ item, items, onClose }) {
         <button className="popup__nav popup__nav--prev" onClick={goPrev}>‹</button>
         <button className="popup__nav popup__nav--next" onClick={goNext}>›</button>
         <div className="popup__video">
-          <iframe
+          <video
             key={current.id}
-            src={popupVideoUrl}
-            title={current.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            src={current.videoSrc}
+            controls
+            autoPlay
+            onEnded={goNext}
           />
         </div>
         <div className="popup__info">

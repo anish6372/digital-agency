@@ -5,6 +5,7 @@ import About from './components/Aboutpage/About'
 import Services from './components/ServicePage/Service'
 import Work from './components/Workpage/Work'
 import Contact from './components/contactpage/Contact'
+import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/work" element={<Work />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <WhatsAppButton />
     </div>
   )
 }
