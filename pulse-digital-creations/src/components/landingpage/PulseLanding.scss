@@ -423,7 +423,6 @@
   // ===== PORTFOLIO =====
   .portfolio {
     padding: 100px 0;
-    overflow: hidden;
     position: relative;
     background: transparent;
     z-index: 1;
@@ -432,38 +431,55 @@
       font-size: 12px;
       color: var(--gray-400);
       margin-top: -30px;
-      margin-bottom: 40px;
+      margin-bottom: 0;
     }
 
-    &__track {
-      display: flex;
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
-      padding-bottom: 40px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      &::-webkit-scrollbar { display: none; }
+      margin-top: 50px;
+
+      @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 560px) { grid-template-columns: 1fr; }
     }
   }
 
   .portfolio-card {
-    flex: 0 0 320px;
+    width: 100%;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 20px;
     overflow: hidden;
+    cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     &:hover {
       transform: translateY(-10px) scale(1.02);
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(232, 93, 4, 0.15);
+      border-color: var(--card-accent, var(--accent));
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--card-accent, var(--accent));
     }
 
     &__thumb {
-      aspect-ratio: 16/10;
+      aspect-ratio: 9/16;
       position: relative;
       background: var(--gray-900);
       overflow: hidden;
+    }
+
+    &__index {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--white);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      padding: 4px 9px;
+      border-radius: 8px;
     }
 
     &__video {
@@ -510,7 +526,7 @@
     }
 
     &__info { padding: 24px; }
-    &__cat { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
+    &__cat { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
     &__title { font-size: 18px; color: var(--white); margin-top: 8px; }
   }
 

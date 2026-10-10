@@ -35,7 +35,7 @@ export default function Contact() {
                 <span className="icon">📞</span>
                 <div className="text">
                    <label>Call Us</label>
-                   <span>9438556276</span>
+                   <span>9438536276</span>
                 </div>
               </div>
 
@@ -43,7 +43,7 @@ export default function Contact() {
                 <span className="icon">✉</span>
                 <div className="text">
                    <label>Email Us</label>
-                   <span>pulse.digital</span>
+                   <span>pulsedigitalcreations@gmail.com</span>
                 </div>
               </div>
 

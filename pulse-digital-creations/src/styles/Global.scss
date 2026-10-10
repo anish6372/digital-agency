@@ -28,6 +28,12 @@ html, body, #root {
 }
 
 a { text-decoration: none; color: inherit; }
-button { cursor: pointer; font-family: var(--font-body); }
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  background: none;
+  border: none;
+  color: inherit;
+}
 ul { list-style: none; }
 img { display: block; max-width: 100%; }

@@ -17,6 +17,7 @@ const portfolioItems = [
     category: 'Before & After',
     videoSrc: '/videos/5-signs-before-after.mp4',
     desc: 'A compelling before-and-after story highlighting five key signs of transformation.',
+    accent: '#e85d04',
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const portfolioItems = [
     category: 'Before & After',
     videoSrc: '/videos/before-after-ca.mp4',
     desc: 'A powerful before-and-after showcase produced for a Chartered Accountancy brand.',
+    accent: '#e91e8c',
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const portfolioItems = [
     category: 'Reels Production',
     videoSrc: '/videos/my-ca-4.mp4',
     desc: 'A dynamic brand reel crafted for a Chartered Accountancy client.',
+    accent: '#1a3fff',
   },
   {
     id: 4,
@@ -38,12 +41,11 @@ const portfolioItems = [
     category: 'Reels Production',
     videoSrc: '/videos/my-ca-desk-draft-v1.mp4',
     desc: 'A cinematic desk-side narrative reel built for a Chartered Accountancy brand.',
+    accent: '#ffd100',
   },
 ]
 
-const loopedItems = [...portfolioItems, ...portfolioItems, ...portfolioItems]
-
-function PortfolioCard({ item, onClick }) {
+function PortfolioCard({ item, index, onClick }) {
   const [hovered, setHovered] = useState(false)
   const videoRef = useRef(null)
 
@@ -62,6 +64,7 @@ function PortfolioCard({ item, onClick }) {
   return (
     <div
       className="portfolio-card"
+      style={{ '--card-accent': item.accent }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
@@ -76,6 +79,8 @@ function PortfolioCard({ item, onClick }) {
           playsInline
           preload="metadata"
         />
+
+        <span className="portfolio-card__index">{String(index + 1).padStart(2, '0')}</span>
 
         <div className="portfolio-card__logo-badge">
           <img src={pulseLogo} alt="Pulse Digital Creations" />
@@ -96,7 +101,7 @@ function PortfolioCard({ item, onClick }) {
       </div>
 
       <div className="portfolio-card__info">
-        <span className="portfolio-card__cat">{item.category}</span>
+        <span className="portfolio-card__cat" style={{ color: item.accent }}>{item.category}</span>
         <h3 className="portfolio-card__title">{item.title}</h3>
       </div>
     </div>
@@ -160,31 +165,6 @@ function VideoPopup({ item, items, onClose }) {
 export default function PulseLanding() {
   const [popup, setPopup] = useState(null)
   const navigate = useNavigate()
-  const trackRef = useRef(null)
-  const scrollRef = useRef(null)
-  const isPaused = useRef(false)
-
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const CARD_WIDTH = 312
-    const TOTAL = portfolioItems.length * CARD_WIDTH
-    let pos = TOTAL
-    track.style.transition = 'none'
-    track.scrollLeft = pos
-    const scroll = () => {
-      if (isPaused.current) { scrollRef.current = requestAnimationFrame(scroll); return }
-      pos += 0.6
-      if (pos >= TOTAL * 2) { pos = TOTAL; track.style.transition = 'none'; track.scrollLeft = pos }
-      else { track.scrollLeft = pos }
-      scrollRef.current = requestAnimationFrame(scroll)
-    }
-    scrollRef.current = requestAnimationFrame(scroll)
-    return () => cancelAnimationFrame(scrollRef.current)
-  }, [])
-
-  const pauseScroll = () => { isPaused.current = true }
-  const resumeScroll = () => { isPaused.current = false }
 
   return (
     <div className="pulse-landing">
@@ -282,24 +262,25 @@ export default function PulseLanding() {
         <div className="container">
           <p className="section-label">Our Work</p>
           <h2 className="section-heading">Featured Projects</h2>
-          <p className="portfolio__hint">Hover to preview full cinematic experiences</p>
-        </div>
+          <p className="portfolio__hint">Hover a reel to preview, click to watch in full</p>
 
-        <div
-          className="portfolio__track"
-          ref={trackRef}
-          onMouseEnter={pauseScroll}
-          onMouseLeave={resumeScroll}
-          onTouchStart={pauseScroll}
-          onTouchEnd={resumeScroll}
-        >
-          {loopedItems.map((item, idx) => (
-            <PortfolioCard
-              key={`${item.id}-${idx}`}
-              item={item}
-              onClick={() => setPopup(item)}
-            />
-          ))}
+          <div className="portfolio__grid">
+            {portfolioItems.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.12, duration: 0.6 }}
+              >
+                <PortfolioCard
+                  item={item}
+                  index={idx}
+                  onClick={() => setPopup(item)}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -344,8 +325,8 @@ export default function PulseLanding() {
           <div className="footer-top">
              <div className="footer-logo">PULSE</div>
              <div className="footer-contact">
-                <span>📞 9438556276</span>
-                <span>✉ pulse.digital</span>
+                <span>📞 9438536276</span>
+                <span>✉ pulsedigitalcreations@gmail.com</span>
              </div>
           </div>
           <div className="footer-bottom">
