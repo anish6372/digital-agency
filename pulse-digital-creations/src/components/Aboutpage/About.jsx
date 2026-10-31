@@ -84,20 +84,7 @@ export default function About() {
       {/* TEAM (Optional/Placeholder) */}
       <section className="about-team">
         <div className="container">
-          <p className="about-team__label">The Pulse Collective</p>
-          <h2 className="about-team__heading">Meet the Minds</h2>
-          <div className="about-team__grid">
-             {[
-               { name: 'Rama Krushna Panda', role: 'Creative Director, Founder & Brand Strategist', icon: '👨‍💻' },
-               { name: 'Disha Padhi', role: 'Content Producer', icon: '👩‍🎨' }
-             ].map((t, i) => (
-                <div key={i} className="team-card">
-                   <div className="team-card__avatar">{t.icon}</div>
-                   <h4 className="team-card__name">{t.name}</h4>
-                   <p className="team-card__role">{t.role}</p>
-                </div>
-             ))}
-          </div>
+          <img className="about-team__image" src="/core-team.jpg" alt="Meet the core team: Ramkrushna Panda, Sanak Padhi and Tanish Kumawat" />
         </div>
       </section>
 

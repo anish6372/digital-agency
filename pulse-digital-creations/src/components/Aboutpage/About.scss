@@ -58,6 +58,7 @@
     &__label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--red); margin-bottom: 16px; }
     &__heading { font-size: clamp(36px, 5vw, 64px); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 56px; }
     &__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); gap: 24px; }
+    &__image { display: block; width: 100%; height: auto; border-radius: var(--radius-card); }
   }
 
   .team-card {

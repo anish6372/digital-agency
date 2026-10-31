@@ -38,7 +38,7 @@ export default function Contact() {
                 <span className="icon">📞</span>
                 <div className="text">
                    <label>Call Us</label>
-                   <span>9352073285</span>
+                   <span>9606030213</span>
                 </div>
               </div>
 

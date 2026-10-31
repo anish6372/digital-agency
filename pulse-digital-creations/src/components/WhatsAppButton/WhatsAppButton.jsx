@@ -1,6 +1,6 @@
 import './WhatsAppButton.scss'
 
-const PHONE = '919352073285'
+const PHONE = '919606030213'
 const SERVICES = [
   'Reels Production',
   'Branding & Logo Design',

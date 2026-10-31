@@ -33,7 +33,7 @@ export default function Footer() {
               </div>
               <div className="footer-col">
                 <h4 className="footer-heading">Phone</h4>
-                <a className="footer-text" href="tel:9352073285">9352073285</a>
+                <a className="footer-text" href="tel:9606030213">9606030213</a>
               </div>
             </div>
             <div className="footer-col">
