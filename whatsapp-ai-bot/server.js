@@ -37,7 +37,7 @@ Services we offer:
 5. Product Photography — product shoots, lifestyle photography, catalogue shoots, e-commerce ready edits
 6. Web Design — landing pages, portfolio sites, e-commerce design, UI/UX consulting
 
-Contact for human follow-up: pulsedigitalcreations@gmail.com / 9438536276.
+Contact for human follow-up: pulsedigitalcreations@gmail.com / 9352073285.
 
 Style rules for WhatsApp:
 - Keep replies short — 2-4 sentences, not an essay.
@@ -139,7 +139,7 @@ app.post('/webhook', (req, res) => {
       console.error('[ai] generateReply failed', err)
       sendWhatsAppMessage(
         from,
-        "Sorry, I hit a snag on my end. Please try again in a moment, or reach us directly at pulsedigitalcreations@gmail.com / 9438536276.",
+        "Sorry, I hit a snag on my end. Please try again in a moment, or reach us directly at pulsedigitalcreations@gmail.com / 9352073285.",
       )
     })
 })

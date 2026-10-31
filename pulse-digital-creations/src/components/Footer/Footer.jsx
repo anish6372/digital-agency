@@ -33,10 +33,13 @@ export default function Footer() {
               </div>
               <div className="footer-col">
                 <h4 className="footer-heading">Phone</h4>
-                <a className="footer-text" href="tel:9438536276">9438536276</a>
+                <a className="footer-text" href="tel:9352073285">9352073285</a>
               </div>
             </div>
-            <p className="footer-text">Based in India, serving global brands with creative passion.</p>
+            <div className="footer-col">
+              <h4 className="footer-heading">Office</h4>
+              <p className="footer-text">Pop Cottage, 142, HAL Old Airport Rd, behind Manipal Hospital Internal Road, Rustam Bagh Layout, Bengaluru, Karnataka 560017</p>
+            </div>
           </div>
         </div>
       </div>
