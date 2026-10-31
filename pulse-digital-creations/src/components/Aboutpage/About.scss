@@ -1,207 +1,82 @@
 .about-page {
-  background: var(--bg);
-  min-height: 100vh;
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    @media (max-width: 768px) { padding: 0 24px; }
-  }
-
-  // ===== HEADER =====
-  &__header {
-    text-align: center;
-    padding: 140px 0 100px;
-    background: linear-gradient(180deg, #0a0a0a 0%, var(--bg) 100%);
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  &__label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: clamp(40px, 8vw, 84px);
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-
-  &__sub {
-    font-size: 18px;
-    color: var(--gray-400);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-
   // ===== STORY =====
   .about-story {
-    padding: 120px 0;
-    
+    padding: 110px var(--pad-x);
+
     &__grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 100px;
       align-items: center;
-      
-      @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
+      @media (max-width: 900px) { grid-template-columns: 1fr; gap: 56px; }
     }
 
     &__text {
-      h2 {
-        font-family: var(--font-display);
-        font-size: clamp(28px, 4vw, 44px);
-        color: var(--white);
-        margin-bottom: 24px;
-      }
-
-      p {
-        font-size: 17px;
-        line-height: 1.8;
-        color: var(--gray-400);
-        margin-bottom: 20px;
-        strong { color: var(--white); }
-      }
+      h2 { font-size: clamp(32px, 4vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 28px; }
+      p { font-size: 19px; font-weight: 300; line-height: 1.7; color: rgba(60,60,60,.9); margin-bottom: 20px; }
+      strong { font-weight: 700; color: var(--black); }
     }
 
-    &__visual {
-      display: flex;
-      justify-content: center;
-      
-      .pulse-circle {
-        width: 200px; height: 200px;
-        background: var(--accent);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 64px;
-        font-weight: 800;
-        color: var(--white);
-        position: relative;
-        z-index: 1;
-
-        .pulse-ring {
-           position: absolute;
-           inset: -20px;
-           border: 2px solid var(--accent);
-           border-radius: 50%;
-           opacity: 0;
-           animation: pulseScale 3s infinite;
-           pointer-events: none;
-           
-           &:nth-child(2) { animation-delay: 1s; }
-           &:nth-child(3) { animation-delay: 2s; }
-        }
-      }
+    // flat "P" mark, replaces the old animated rings
+    .pulse-circle {
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 440px;
+      margin: 0 auto;
+      width: 100%;
+      background: var(--red);
+      border-radius: var(--radius-card);
+      display: flex; align-items: center; justify-content: center;
+      span { font-size: clamp(120px, 18vw, 240px); font-weight: 700; color: var(--white); letter-spacing: -0.05em; }
     }
-  }
-
-  @keyframes pulseScale {
-    0% { transform: scale(0.8); opacity: 0; }
-    50% { opacity: 0.3; }
-    100% { transform: scale(1.6); opacity: 0; }
+    .pulse-ring { display: none; }
   }
 
   // ===== VALUES =====
   .about-values {
-    padding: 120px 0;
-    background: rgba(255,255,255,0.02);
+    background: var(--bg-light);
+    padding: 100px var(--pad-x);
 
-    &__label { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 12px; }
-    &__heading { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); text-align: center; color: var(--white); margin-bottom: 60px; }
+    &__label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--red); margin-bottom: 16px; }
+    &__heading { font-size: clamp(36px, 5vw, 64px); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 56px; }
 
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      
-      @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
-      @media (max-width: 600px) { grid-template-columns: 1fr; }
-    }
+    &__grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--black); @media (max-width: 1000px) { grid-template-columns: repeat(2, 1fr); } @media (max-width: 560px) { grid-template-columns: 1fr; } }
+  }
 
-    .value-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      padding: 40px 32px;
-      border-radius: 24px;
-      transition: all 0.3s;
-      
-      &:hover { border-color: var(--accent); transform: translateY(-5px); }
-      
-      &__icon { font-size: 32px; margin-bottom: 24px; display: block; }
-      h3 { font-size: 20px; color: var(--white); margin-bottom: 12px; }
-      p { color: var(--gray-400); font-size: 15px; line-height: 1.6; }
-    }
+  .value-card {
+    padding: 36px 28px 40px 0;
+    border-bottom: 1px solid var(--black);
+    &__icon { font-size: 30px; display: block; margin-bottom: 18px; }
+    h3 { font-size: 26px; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 10px; }
+    p { font-size: 16px; line-height: 1.6; color: rgba(60,60,60,.9); }
   }
 
   // ===== TEAM =====
   .about-team {
-    padding: 120px 0;
+    padding: 100px var(--pad-x);
 
-    &__label { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-align: center; text-transform: uppercase; margin-bottom: 12px; }
-    &__heading { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); text-align: center; color: var(--white); margin-bottom: 60px; }
+    &__label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--red); margin-bottom: 16px; }
+    &__heading { font-size: clamp(36px, 5vw, 64px); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 56px; }
+    &__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); gap: 24px; }
+  }
 
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      
-      @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .team-card {
-      text-align: center;
-      padding: 40px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      transition: all 0.3s;
-      
-      &:hover { border-color: var(--accent); transform: scale(1.02); }
-
-      &__avatar {
-        width: 80px; height: 80px;
-        background: #111;
-        border: 1px solid var(--card-border);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        margin: 0 auto 24px;
-      }
-
-      &__name { font-size: 18px; color: var(--white); margin-bottom: 4px; }
-      &__role { font-size: 13px; color: var(--gray-500); }
-    }
+  .team-card {
+    background: var(--bg-light);
+    border-radius: var(--radius-card);
+    padding: 40px 32px;
+    &__avatar { font-size: 48px; margin-bottom: 28px; }
+    &__name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    &__role { font-size: 15px; color: var(--text-gray); line-height: 1.5; }
   }
 
   // ===== CTA =====
   .about-cta {
-    padding: 120px 0;
+    background: var(--red);
+    color: var(--white);
     text-align: center;
-    background: linear-gradient(180deg, var(--bg) 0%, #000 100%);
-    border-top: 1px solid var(--card-border);
-
-    h2 { font-family: var(--font-display); font-size: clamp(32px, 6vw, 56px); color: var(--white); margin-bottom: 24px; }
-    p { color: var(--gray-400); font-size: 18px; margin-bottom: 48px; }
-    
-    &__btns {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    padding: 120px var(--pad-x);
+    h2 { font-size: clamp(40px, 6vw, 90px); font-weight: 700; letter-spacing: -0.04em; text-transform: uppercase; margin-bottom: 18px; }
+    p { font-size: clamp(17px, 1.6vw, 22px); font-weight: 300; margin-bottom: 40px; }
+    &__btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
   }
 }

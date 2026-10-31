@@ -1,154 +1,30 @@
 .services-page {
-  background: var(--bg);
-  min-height: 100vh;
+  &__list { padding: 40px var(--pad-x) 100px; }
 
-  &__header {
-    text-align: center;
-    padding: 120px 40px 80px;
-    background: linear-gradient(180deg, #0a0a0a 0%, var(--bg) 100%);
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  &__label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 64px);
-    letter-spacing: 3px;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  &__sub {
-    font-size: 18px;
-    color: var(--gray-400);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-
-  &__grid {
+  .srv-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    padding: 60px 80px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: 70px 1.3fr 1fr;
+    gap: 40px;
+    padding: 44px 8px;
+    border-top: 1px solid var(--black);
+    &:last-child { border-bottom: 1px solid var(--black); }
+
+    &__num { font-size: 16px; font-weight: 300; color: var(--red); padding-top: 14px; }
+    &__title { font-size: clamp(30px, 4vw, 56px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 16px; }
+    &__desc { font-size: 17px; line-height: 1.6; max-width: 560px; color: rgba(60,60,60,.9); }
+    &__tags { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px; padding-top: 14px; }
+    &__tags li { font-size: 14px; padding: 8px 16px; border: 1px solid var(--black); border-radius: 40px; }
+
+    @media (max-width: 900px) { grid-template-columns: 40px 1fr; gap: 20px; &__tags { grid-column: 2; padding-top: 0; } }
   }
 
   &__cta {
-    text-align: center;
-    padding: 100px 40px;
-    background: linear-gradient(180deg, var(--bg), #000);
-    border-top: 1px solid var(--card-border);
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: 36px;
-      letter-spacing: 2px;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 32px;
-    }
-  }
-
-  @media (max-width: 900px) {
-    &__grid { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
-    &__header { padding: 60px 24px 40px; }
-    &__cta { padding: 50px 24px 60px; }
-  }
-
-  @media (max-width: 600px) {
-    &__grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 14px; }
-    &__header { padding: 40px 16px 32px; }
-    &__cta { padding: 40px 16px; }
-  }
-}
-
-// ===== SERVICE CARD =====
-.srv-card {
-  background: var(--card-bg);
-  border-radius: 20px;
-  padding: 40px 32px;
-  border: 1px solid var(--card-border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    border-radius: 20px 20px 0 0;
-  }
-
-  &--orange::before { background: linear-gradient(90deg, #e85d04, #f48c06); }
-  &--gold::before   { background: linear-gradient(90deg, #c8860a, #e8a020); }
-  &--blue::before   { background: linear-gradient(90deg, #1a3fff, #4a6fff); }
-  &--purple::before { background: linear-gradient(90deg, #6a0dad, #a020f0); }
-  &--green::before  { background: linear-gradient(90deg, #0a7a3a, #10c060); }
-  &--teal::before   { background: linear-gradient(90deg, #0a7a7a, #10c0c0); }
-
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    border-color: rgba(255,255,255,0.12);
-  }
-
-  &__icon {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  &__title {
-    font-size: 18px;
-    font-weight: 600;
+    background: var(--red);
     color: var(--white);
-    margin-bottom: 12px;
-  }
-
-  &__desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  &__list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    li {
-      font-size: 13px;
-      color: rgba(255,255,255,0.65);
-      padding-left: 18px;
-      position: relative;
-
-      &::before {
-        content: '→';
-        position: absolute;
-        left: 0;
-        color: var(--accent);
-        font-size: 11px;
-      }
-    }
+    text-align: center;
+    padding: 120px var(--pad-x);
+    h2 { font-size: clamp(40px, 6vw, 90px); font-weight: 700; letter-spacing: -0.04em; text-transform: uppercase; margin-bottom: 18px; }
+    p { font-size: clamp(17px, 1.6vw, 22px); font-weight: 300; margin-bottom: 40px; }
+    .btn--gold { background: var(--black); &:hover { background: #222; } }
   }
 }
-
-// Shared btn styles removed - using global from index.css

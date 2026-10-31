@@ -1,15 +1,17 @@
 import './About.scss'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 export default function About() {
+  const navigate = useNavigate()
   return (
     <div className="about-page">
       {/* HEADER */}
-      <section className="about-page__header">
-        <div className="container">
-          <p className="about-page__label">Our Story</p>
-          <h1 className="about-page__title">Pulse Digital Creations</h1>
-          <p className="about-page__sub">
+      <section className="page-hero">
+        <div>
+          <p className="page-hero__label">Our Story</p>
+          <h1 className="page-hero__title">Pulse Digital Creations</h1>
+          <p className="page-hero__sub">
             A collective of creative minds dedicated to pushing the boundaries of digital storytelling.
           </p>
         </div>
@@ -105,8 +107,8 @@ export default function About() {
           <h2>Ready to find your pulse?</h2>
           <p>Let's collaborate and build something that resonates.</p>
           <div className="about-cta__btns">
-            <button className="btn btn--gold btn--lg">Start a Project</button>
-            <button className="btn btn--outline btn--lg">View Our Work</button>
+            <button className="btn btn--outline btn--lg" onClick={() => navigate("/contact")}>Start a Project</button>
+            <button className="btn btn--outline btn--lg" onClick={() => navigate("/work")}>View Our Work</button>
           </div>
         </div>
       </section>

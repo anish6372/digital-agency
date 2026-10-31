@@ -1,0 +1,87 @@
+// Extra polish layered on top of PulseLanding.scss
+.pulse-landing {
+  // hero glow — keeps the hero rich even before the video loads
+  .hero-background { background: radial-gradient(120% 90% at 80% 0%, #2a0610 0%, #000 60%); }
+  .hero-glow { position: absolute; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .hero-glow--one { width: 46vw; height: 46vw; right: -10vw; top: -18vw; background: rgba(220,31,62,.55); animation: glow-drift 14s ease-in-out infinite; }
+  .hero-glow--two { width: 30vw; height: 30vw; left: -8vw; bottom: -14vw; background: rgba(202,219,54,.16); animation: glow-drift 18s ease-in-out infinite reverse; }
+  @keyframes glow-drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-4vw, 3vw); } }
+  .hero-background video { z-index: 1; opacity: .9; }
+  .hero-background::after { z-index: 2; }
+
+  .hero-tagline { text-shadow: 0 6px 40px rgba(0,0,0,.45); }
+
+  .hero-scroll {
+    position: absolute; left: var(--pad-x); bottom: 28px; z-index: 3;
+    width: 1px; height: 54px; background: rgba(255,255,255,.25); overflow: hidden;
+    span { display: block; width: 100%; height: 40%; background: var(--red); animation: scroll-line 1.8s ease-in-out infinite; }
+    @media (max-width: 768px) { display: none; }
+  }
+  @keyframes scroll-line { 0% { transform: translateY(-100%); } 100% { transform: translateY(260%); } }
+
+  // intro words
+  .intro-section__badges span { transition: color .3s, transform .3s; cursor: default; &:hover { color: var(--red); transform: translateY(-3px); } }
+
+  // accordion polish
+  .service-item { position: relative; }
+  .service-item-header { transition: padding-left .35s ease; &:hover { opacity: 1; padding-left: 24px; } }
+  .service-title { transition: color .3s; }
+  .service-item-header:hover .service-title, .service-item--active .service-title { color: var(--red); }
+  .service-number { font-weight: 500; }
+  .service-image-float {
+    position: absolute; right: 70px; top: 18px;
+    width: 300px; height: 230px;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    opacity: 0; pointer-events: none;
+    transform: rotate(var(--rotate, -5deg)) scale(.88);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 24px 60px rgba(0,0,0,.25);
+    z-index: 2; background: #000;
+    video { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 900px) { display: none; }
+  }
+  .service-item--active .service-image-float { opacity: 1; transform: rotate(var(--rotate, -5deg)) scale(1); }
+  .service-tags li { transition: background .25s, color .25s, border-color .25s; &:hover { background: var(--red); border-color: var(--red); color: var(--white); } }
+
+  // about band
+  .about-band { position: relative; overflow: hidden; }
+  .about-band > *:not(.about-band__mark) { position: relative; z-index: 1; }
+  .about-band__mark {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(200px, 36vw, 640px);
+    font-weight: 700; letter-spacing: -0.05em; line-height: 1;
+    color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.14);
+    pointer-events: none; user-select: none; white-space: nowrap;
+  }
+
+  // work cards
+  .project-card { transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s; &:hover { transform: translateY(-6px); box-shadow: 0 30px 70px rgba(0,0,0,.28); } }
+  .project-card:hover .project-card__overlay { background: linear-gradient(to top, rgba(220,31,62,.85), rgba(0,0,0,.1) 70%); }
+  .project-card__title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .project-card__arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--black);
+    font-size: 20px; flex-shrink: 0;
+    transform: translate(-10px, 10px) scale(.6); opacity: 0;
+    transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .3s;
+  }
+  .project-card:hover .project-card__arrow { transform: none; opacity: 1; }
+  .project-card__play {
+    position: absolute; top: 24px; right: 24px; z-index: 2;
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.18); backdrop-filter: blur(8px);
+    color: var(--white); font-size: 14px; padding-left: 3px;
+    transition: opacity .3s, transform .3s;
+  }
+  .project-card:hover .project-card__play { opacity: 0; transform: scale(.7); }
+
+  // marquee tiles
+  .client-logo {
+    background: transparent; border: 1px solid #e1e4e8;
+    transition: background .35s, color .35s, border-color .35s;
+    &:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  }
+}

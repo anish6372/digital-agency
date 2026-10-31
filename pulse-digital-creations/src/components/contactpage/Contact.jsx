@@ -11,15 +11,15 @@ export default function Contact() {
 
   return (
     <div className="contact-page">
-      <div className="container">
-        <div className="contact-page__header">
-          <p className="section-label">Connect With Us</p>
-          <h1 className="section-title">Start a Project</h1>
-          <p className="contact-page__sub">
+      <section className="page-hero">
+          <p className="page-hero__label">Connect With Us</p>
+          <h1 className="page-hero__title">Start a Project</h1>
+          <p className="page-hero__sub">
              Tell us about your brand vision. Let's create something legendary together.
           </p>
-        </div>
+      </section>
 
+      <div className="container">
         <div className="contact-grid">
           <motion.div 
             className="contact-info"
