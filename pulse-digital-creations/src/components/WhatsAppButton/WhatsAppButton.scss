@@ -3,21 +3,64 @@
   bottom: 24px;
   right: 24px;
   z-index: 999;
-  width: 58px;
-  height: 58px;
+  width: 62px;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #25d366, #1ebe5a);
+  background: linear-gradient(145deg, #4ce27f, #1faa52);
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.6);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 3px solid #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.6);
+  transition: transform 0.25s ease;
   animation: whatsapp-pulse 2.4s infinite;
 
   svg {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #ff3b30;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__tip {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translate(8px, -50%);
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  &:hover &__tip {
+    opacity: 1;
+    transform: translate(0, -50%);
   }
 
   &:hover {
@@ -31,13 +74,13 @@
 
 @keyframes whatsapp-pulse {
   0% {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.55);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.55);
   }
   70% {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 14px rgba(37, 211, 102, 0);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 14px rgba(37, 211, 102, 0);
   }
   100% {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
 
@@ -45,12 +88,16 @@
   .whatsapp-float {
     bottom: 18px;
     right: 18px;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
 
     svg {
-      width: 26px;
-      height: 26px;
+      width: 34px;
+      height: 34px;
+    }
+
+    &__tip {
+      display: none;
     }
   }
 }
