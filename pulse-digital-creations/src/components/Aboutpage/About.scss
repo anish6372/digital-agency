@@ -35,7 +35,7 @@
   // ===== VALUES =====
   .about-values {
     background: var(--bg-light);
-    padding: 100px var(--pad-x);
+    padding: 80px 0 100px;
 
     &__label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--red); margin-bottom: 16px; }
     &__heading { font-size: clamp(36px, 5vw, 64px); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 56px; }
@@ -53,12 +53,14 @@
 
   // ===== TEAM =====
   .about-team {
-    padding: 100px var(--pad-x);
+    padding: 0;
+    background: #fff;
+    .container { max-width: none; padding: 0; }
 
     &__label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--red); margin-bottom: 16px; }
     &__heading { font-size: clamp(36px, 5vw, 64px); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 56px; }
     &__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); gap: 24px; }
-    &__image { display: block; width: 100%; height: auto; border-radius: var(--radius-card); }
+    &__image { display: block; width: 100%; max-width: none; margin: 0; height: auto; border-radius: 0; box-shadow: none; }
   }
 
   .team-card {

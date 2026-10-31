@@ -84,7 +84,13 @@ export default function About() {
       {/* TEAM (Optional/Placeholder) */}
       <section className="about-team">
         <div className="container">
-          <img className="about-team__image" src="/core-team.jpg" alt="Meet the core team: Ramkrushna Panda, Sanak Padhi and Tanish Kumawat" />
+          <motion.img
+            className="about-team__image"
+            src="/core-team.jpg"
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }} alt="Meet the core team: Ramkrushna Panda, Sanak Padhi and Tanish Kumawat" />
         </div>
       </section>
 
